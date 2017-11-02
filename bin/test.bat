@@ -1,6 +1,6 @@
 @echo off
 cd /d "%~dp0"
-REM lets wait for 90 seconds to reduce the resource impact on startup
+:: lets wait for 90 seconds to reduce the resource impact on startup
 ping localhost -n 91 >nul
 REM echo %time%>>testtest.txt
 "%~dp0\wget" -N https://raw.githubusercontent.com/thaatz/w10lite/master/bin/ooshutup10.cfg
