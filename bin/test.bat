@@ -1,4 +1,6 @@
 @echo off
+:: we need this to address variables (namely the errorlevel) in the nested if statement
+setlocal enableDelayedExpansion
 REM cd /d "%~dp0"
 pushd "%~dp0" 2>NUL
 call :read_settings w10lite.ini
@@ -24,13 +26,13 @@ if %safemode%==legacy (bcdedit /set {default} bootmenupolicy legacy
 
 :: lets wait for 90 seconds to reduce the resource impact on startup
 ping localhost -n 91 >nul
-wget -N https://raw.githubusercontent.com/thaatz/w10lite/master/bin/%cfg%
+REM wget -N https://raw.githubusercontent.com/thaatz/w10lite/master/bin/%cfg%
 :: we cant pipe the output of wget, so we make a log file instead
 wget -N https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe -o testlog.txt
 if %config%==master (
 	find /i "saved" testlog.txt >nul
-	REM echo errorlevel %errorlevel%
-	if %errorlevel%==0 (
+	REM echo errorlevel !errorlevel!
+	if !errorlevel!==0 (
 		msg * OOSU10 was updated!
 		)
 	)
