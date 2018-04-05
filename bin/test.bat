@@ -26,7 +26,7 @@ if %safemode%==legacy (bcdedit /set {default} bootmenupolicy legacy
 
 :: lets wait for 90 seconds to reduce the resource impact on startup
 ping localhost -n 91 >nul
-REM wget -N https://raw.githubusercontent.com/thaatz/w10lite/master/bin/%cfg%
+wget -N https://raw.githubusercontent.com/thaatz/w10lite/master/bin/%cfg%
 :: we cant pipe the output of wget, so we make a log file instead
 wget -N https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe -o testlog.txt
 if %config%==master (
