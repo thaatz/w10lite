@@ -28,20 +28,21 @@ if %safemode%==legacy (bcdedit /set {default} bootmenupolicy legacy
 ping localhost -n 91 >nul
 wget -N https://raw.githubusercontent.com/thaatz/w10lite/master/bin/%cfg%
 :: we cant pipe the output of wget, so we make a log file instead
-wget -N https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe -o testlog.txt
-if %config%==master (
-	find /i "saved" testlog.txt >nul
-	REM echo errorlevel !errorlevel!
-	if !errorlevel!==0 (
-		msg * OOSU10 was updated!
-		)
-	)
+choco upgrade shutup10 -y
+@REM wget -N https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe -o testlog.txt
+@REM if %config%==master (
+@REM 	find /i "saved" testlog.txt >nul
+@REM 	REM echo errorlevel !errorlevel!
+@REM 	if !errorlevel!==0 (
+@REM 		msg * OOSU10 was updated!
+@REM 		)
+@REM 	)
 :: some other interesting message ideas that i did not use because the script will run as system, not user
 :: but i might need this some other day
 :: https://stackoverflow.com/questions/12514475/how-can-you-create-pop-up-messages-in-a-batch-script
 
 ::delete the wget log file
-del testlog.txt
+@REM del testlog.txt
 OOSU10.exe %cfg% /quiet /nosrp
 exit
 
